@@ -1,12 +1,22 @@
-run = ["python -m uvicorn server:app --host 0.0.0.0 -port 8080"]
+run = [
+  "python",
+  "-m",
+  "uvicorn",
+  "server:app",
+  "--host",
+  "0.0.0.0",
+  "--port",
+  "8080",
+]
 hidden = ["venv", ".config", "**/__pycache__", "**/.mypy_cache", "**/*.pyc"]
-modules = ["python-3.13.1", "python-base-3.13"]
+modules = ["python-3.12"]
 
 [nix]
-channel = "stable-22_11"
-
-[unitTest]
-language = "python3"
+channel = "stable-24_05"
 
 [gitHubImport]
 requiredFiles = [".replit", "replit.nix", ".config", "venv"]
+
+[[ports]]
+localPort = 8080
+externalPort = 80

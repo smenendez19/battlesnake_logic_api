@@ -63,8 +63,11 @@ def calculate_distance_food(data, my_head):
         y = food_pos["y"] - my_head["y"]
         distance = math.sqrt(x**2 + y**2)
         distance_food[(food_pos["x"], food_pos["y"])] = distance
-    min_distance_food = min(distance_food, key=distance_food.get)
-    best_moves = get_food_move(min_distance_food, my_head)
+    if (len(distance_food)):
+        min_distance_food = min(distance_food, key=distance_food.get)
+        best_moves = get_food_move(min_distance_food, my_head)
+    else:
+        best_moves = []
     return best_moves
 
 
@@ -235,7 +238,7 @@ def choose_move(data: dict) -> str:
     possible_moves = avoid_walls(board_height, board_width, my_head,
                                  possible_moves)
 
-    # Avoid crash with bodies
+    # Avoid crash with body
     possible_moves = avoid_body(my_head, my_body, possible_moves)
 
     # Avoid crash with other snakes
