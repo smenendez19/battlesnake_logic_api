@@ -11,6 +11,18 @@
         {
             "src": "/",
             "dest": "server.py"
+        },
+        {
+            "src": "/start",
+            "dest": "server.py"
+        },
+        {
+            "src": "/move",
+            "dest": "server.py"
+        },
+        {
+            "src": "/end",
+            "dest": "server.py"
         }
     ]
 }
