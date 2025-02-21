@@ -45,7 +45,7 @@ async def handle_start(request: Request):
     """
     data = await request.json()
     return JSONResponse(
-        status.HTTP_200_OK,
+        status_code=status.HTTP_200_OK,
         content={
             "message": f"Game started with id {data['game']['id']}",
         },
@@ -61,7 +61,7 @@ async def handle_move(request: Request):
     data = await request.json()
     move = algorithm.choose_move(data)
     return JSONResponse(
-        status.HTTP_200_OK,
+        status_code=status.HTTP_200_OK,
         content={
             "move": move,
         },
@@ -76,7 +76,7 @@ async def end(request: Request):
     """
     data = await request.json()
     return JSONResponse(
-        status.HTTP_200_OK,
+        status_code=status.HTTP_200_OK,
         content={
             "message": f"Game ended with id {data['game']['id']}",
         },
