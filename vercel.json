@@ -3,26 +3,26 @@
     "public": true,
     "builds": [
         {
-            "src": "server.py",
+            "src": "main.py",
             "use": "@vercel/python"
         }
     ],
     "routes": [
         {
             "src": "/",
-            "dest": "server.py"
+            "dest": "main.py"
         },
         {
             "src": "/start",
-            "dest": "server.py"
+            "dest": "main.py"
         },
         {
             "src": "/move",
-            "dest": "server.py"
+            "dest": "main.py"
         },
         {
             "src": "/end",
-            "dest": "server.py"
+            "dest": "main.py"
         }
     ]
 }

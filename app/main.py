@@ -1,17 +1,14 @@
 # Imports
-
-import logging
 import os
 
+import functions.algorithm as algorithm
 import uvicorn
-from fastapi import FastAPI, Request
-
-import server_logic
+from fastapi import FastAPI, Request, Response, status
 
 app = FastAPI(
-    title="battlesnake_logic_python",
-    description="BattleSnake API with FastAPI",
-    version="0.0.1",
+    title="battlesnake_rest_api",
+    description="BattleSnake Rest API",
+    version="1.0.0",
     docs_url=None,
     redoc_url=None,
     openapi_url=None,
@@ -31,7 +28,7 @@ def handle_info():
     """
     return {
         "apiversion": "1",
-        "author": "NeoDemon",
+        "author": "smenendez19",
         "color": "#810E07",
         "head": "all-seeing",
         "tail": "shiny",
@@ -45,8 +42,12 @@ async def handle_start(request: Request):
     request.json contains information about the game that's about to be played.
     """
     data = await request.json()
-    print(f"{data['game']['id']} START")
-    return "ok"
+    return Response(
+        status.HTTP_200_OK,
+        content={
+            "message": f"Game started with id {data['game']['id']}",
+        },
+    )
 
 
 @app.post("/move")
@@ -56,8 +57,13 @@ async def handle_move(request: Request):
     Valid moves are "up", "down", "left", or "right".
     """
     data = await request.json()
-    move = server_logic.choose_move(data)
-    return {"move": move}
+    move = algorithm.choose_move(data)
+    return Response(
+        status.HTTP_200_OK,
+        content={
+            "move": move,
+        },
+    )
 
 
 @app.post("/end")
@@ -67,12 +73,14 @@ async def end(request: Request):
     It's purely for informational purposes, you don't have to make any decisions here.
     """
     data = await request.json()
-    print(f"{data['game']['id']} END")
-    return "ok"
+    return Response(
+        status.HTTP_200_OK,
+        content={
+            "message": f"Game ended with id {data['game']['id']}",
+        },
+    )
 
 
 if __name__ == "__main__":
-    logging.getLogger("werkzeug").setLevel(logging.ERROR)
     print("Starting Battlesnake Server...")
-    port = int(os.environ.get("PORT", "8080"))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    uvicorn.run(app, host="0.0.0.0", port=8080, log_config=os.path.join("config", "log_conf.yaml"))
