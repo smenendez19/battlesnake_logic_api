@@ -3,26 +3,14 @@
     "public": true,
     "builds": [
         {
-            "src": "main.py",
+            "src": "app/main.py",
             "use": "@vercel/python"
         }
     ],
     "routes": [
         {
-            "src": "/",
-            "dest": "main.py"
-        },
-        {
-            "src": "/start",
-            "dest": "main.py"
-        },
-        {
-            "src": "/move",
-            "dest": "main.py"
-        },
-        {
-            "src": "/end",
-            "dest": "main.py"
+            "src": "/(.*)",
+            "dest": "app/main.py"
         }
     ]
 }
