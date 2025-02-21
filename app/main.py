@@ -2,7 +2,8 @@
 import os
 
 import uvicorn
-from fastapi import FastAPI, Request, Response, status
+from fastapi import FastAPI, Request, status
+from fastapi.responses import JSONResponse
 
 import app.functions.algorithm as algorithm
 
@@ -43,7 +44,7 @@ async def handle_start(request: Request):
     request.json contains information about the game that's about to be played.
     """
     data = await request.json()
-    return Response(
+    return JSONResponse(
         status.HTTP_200_OK,
         content={
             "message": f"Game started with id {data['game']['id']}",
@@ -59,7 +60,7 @@ async def handle_move(request: Request):
     """
     data = await request.json()
     move = algorithm.choose_move(data)
-    return Response(
+    return JSONResponse(
         status.HTTP_200_OK,
         content={
             "move": move,
@@ -74,7 +75,7 @@ async def end(request: Request):
     It's purely for informational purposes, you don't have to make any decisions here.
     """
     data = await request.json()
-    return Response(
+    return JSONResponse(
         status.HTTP_200_OK,
         content={
             "message": f"Game ended with id {data['game']['id']}",
