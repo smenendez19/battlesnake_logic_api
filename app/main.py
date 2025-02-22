@@ -28,6 +28,14 @@ def handle_info():
 
     TIP: If you open your Battlesnake URL in browser you should see this data.
     """
+    snake_data = {
+        "apiversion": "1",
+        "author": "smenendez19",
+        "color": "#810E07",
+        "head": "all-seeing",
+        "tail": "shiny",
+    }
+    print(snake_data)
     return {
         "apiversion": "1",
         "author": "smenendez19",
@@ -44,10 +52,12 @@ async def handle_start(request: Request):
     request.json contains information about the game that's about to be played.
     """
     data = await request.json()
+    message = f"Game started with id {data['game']['id']}"
+    print(message)
     return JSONResponse(
         status_code=status.HTTP_200_OK,
         content={
-            "message": f"Game started with id {data['game']['id']}",
+            "message": message
         },
     )
 
@@ -60,6 +70,8 @@ async def handle_move(request: Request):
     """
     data = await request.json()
     move = algorithm.choose_move(data)
+    message = f"Choosing move {move}"
+    print(message)
     return JSONResponse(
         status_code=status.HTTP_200_OK,
         content={
@@ -75,10 +87,12 @@ async def end(request: Request):
     It's purely for informational purposes, you don't have to make any decisions here.
     """
     data = await request.json()
+    message = f"Game ended with id {data['game']['id']}"
+    print(message)
     return JSONResponse(
         status_code=status.HTTP_200_OK,
         content={
-            "message": f"Game ended with id {data['game']['id']}",
+            "message": message
         },
     )
 
