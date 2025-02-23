@@ -1,11 +1,10 @@
 # Imports
 import os
 
+import algorithm as algorithm
 import uvicorn
 from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
-
-import app.algorithm as algorithm
 
 app = FastAPI(
     title="battlesnake_rest_api",

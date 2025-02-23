@@ -149,7 +149,7 @@ def choose_move(data: dict) -> str:
     board_width = data["board"]["width"]
 
     # print(f"~~~ Turn: {data['turn']}  Game Mode: {data['game']['ruleset']['name']} ~~~")
-    # print(f"All board data this turn: {data}")
+    print(f"All board data this turn: {data}")
     # print(f"My Battlesnakes head this turn is: {my_head}")
     # print(f"My Battlesnakes body this turn is: {my_body}")
 
